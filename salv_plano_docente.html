@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVisualizar Planos Salvos</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="nav-link">← Voltar</a>
+        <a href="add_plano_docente.html" class="nav-link2">Adicionar Plano</a>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <h1>gest<span>rícula</span></h1>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">PLANO DOCENTE</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">Gerencie e movimente os planos docentes</p>
+
+            <form>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="turma">Turma</label>
+                        <select id="turma" required>
+                            <option value="">Selecione a turma</option>
+                            <option value="1a">1º Ano A</option>
+                            <option value="1b">1º Ano B</option>
+                            <option value="2a">2º Ano A</option>
+                            <option value="2b">2º Ano B</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Seção dos planos será exibida após seleção da turma -->
+            <div id="planos-container" style="display: none;">
+                <h3 style="color: #4a9b8e; margin: 30px 0 20px 0;">Planos de Aula da Turma Selecionada</h3>
+                <div id="planos-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados simulados dos planos de aula por turma
+        const planosData = {
+            '1a': [
+                {
+                    id: 1,
+                    titulo: 'Matemática - Álgebra Básica',
+                    data: '15/05/2025',
+                    objetivos: 'Introduzir conceitos fundamentais de álgebra',
+                    conteudo: 'Equações de primeiro grau, variáveis e constantes',
+                    metodologia: 'Aula expositiva com exercícios práticos'
+                },
+                {
+                    id: 2,
+                    titulo: 'Português - Literatura Brasileira',
+                    data: '18/05/2025',
+                    objetivos: 'Apresentar autores do romantismo brasileiro',
+                    conteudo: 'José de Alencar e suas obras principais',
+                    metodologia: 'Leitura dirigida e análise textual'
+                }
+            ],
+            '1b': [
+                {
+                    id: 3,
+                    titulo: 'História - Brasil Colonial',
+                    data: '12/05/2025',
+                    objetivos: 'Compreender o período colonial brasileiro',
+                    conteudo: 'Capitanias hereditárias e governo geral',
+                    metodologia: 'Aula dialogada com mapas históricos'
+                }
+            ],
+            '2a': [
+                {
+                    id: 4,
+                    titulo: 'Física - Mecânica',
+                    data: '20/05/2025',
+                    objetivos: 'Estudar movimento uniforme e uniformemente variado',
+                    conteudo: 'Cinemática: velocidade, aceleração e espaço',
+                    metodologia: 'Demonstrações práticas e resolução de problemas'
+                },
+                {
+                    id: 5,
+                    titulo: 'Química - Tabela Periódica',
+                    data: '22/05/2025',
+                    objetivos: 'Conhecer a organização dos elementos químicos',
+                    conteudo: 'Propriedades periódicas e famílias químicas',
+                    metodologia: 'Experimentos e exercícios de fixação'
+                }
+            ],
+            '2b': [
+                {
+                    id: 6,
+                    titulo: 'Geografia - Relevo Brasileiro',
+                    data: '16/05/2025',
+                    objetivos: 'Identificar as principais formações do relevo nacional',
+                    conteudo: 'Planaltos, planícies e depressões do Brasil',
+                    metodologia: 'Análise de mapas topográficos'
+                }
+            ]
+        };
+
+        // Função para carregar planos da turma selecionada
+        function carregarPlanos(turma) {
+            const planosContainer = document.getElementById('planos-container');
+            const planosList = document.getElementById('planos-list');
+            
+            if (!turma) {
+                planosContainer.style.display = 'none';
+                return;
+            }
+
+            const planos = planosData[turma] || [];
+            
+            if (planos.length === 0) {
+                planosList.innerHTML = '<p style="text-align: center; color: #666;">Nenhum plano de aula encontrado para esta turma.</p>';
+            } else {
+                planosList.innerHTML = planos.map(plano => `
+                    <div class="plano-card">
+                        <div class="plano-header">
+                            <div class="plano-title">${plano.titulo}</div>
+                            <div class="plano-date">${plano.data}</div>
+                        </div>
+                        <div class="plano-content">
+                            <h4>Objetivos:</h4>
+                            <p>${plano.objetivos}</p>
+                            <h4>Conteúdo:</h4>
+                            <p>${plano.conteudo}</p>
+                            <h4>Metodologia:</h4>
+                            <p>${plano.metodologia}</p>
+                        </div>
+                        <button class="btn btn-primary btn-edit" onclick="editarPlano(${plano.id})">Editar Plano</button>
+                    </div>
+                `).join('');
+            }
+            
+            planosContainer.style.display = 'block';
+        }
+
+        // Função para editar plano
+        function editarPlano(id) {
+            // Encontrar o plano pelo ID
+            let planoEncontrado = null;
+            for (let turma in planosData) {
+                planoEncontrado = planosData[turma].find(plano => plano.id === id);
+                if (planoEncontrado) break;
+            }
+            
+            if (planoEncontrado) {
+                // Redirecionar para página de edição (você pode ajustar conforme necessário)
+                window.location.href = `editar_plano.html?id=${id}`;
+                // Ou abrir modal de edição
+                // abrirModalEdicao(planoEncontrado);
+            }
+        }
+
+        // Event listener para mudança na seleção da turma
+        document.getElementById('turma').addEventListener('change', function() {
+            carregarPlanos(this.value);
+        });
+    </script>
+</body>
+</html>

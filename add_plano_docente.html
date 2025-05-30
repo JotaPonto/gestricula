@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Plano Docente</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+      /* Ajuste específico para o campo de seleção de matéria */
+      #subjects {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        background: white;
+      }
+      #subjects:focus {
+        outline: none;
+        border-color: #4a9b8e;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <a href="#" class="nav-link">← Voltar</a>
+      <a href="salv_plano_docente.html" class="nav-link2">Planos Salvos</a>
+    </div>
+
+    <div class="container">
+      <div class="logo">
+        <h1>gest<span>rícula</span></h1>
+      </div>
+
+      <div class="form-section">
+        <h2 class="section-title">PLANO DOCENTE</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+          Gerencie e movimente os planos docentes
+        </p>
+
+        <form>
+          <div class="form-grid">
+            <!-- Seleção da Turma -->
+            <div class="form-group">
+              <label for="turma">Turma</label>
+              <select id="turma" required>
+                <option value="">Selecione a turma</option>
+                <option value="1a">1º Ano A</option>
+                <option value="1b">1º Ano B</option>
+                <option value="2a">2º Ano A</option>
+                <option value="2b">2º Ano B</option>
+              </select>
+            </div>
+
+            <!-- Campo extra: seleção de matéria (ocupando toda a largura) -->
+            <div class="form-group full-width" id="subject-container" style="display: none;">
+              <label for="subjects">Selecione a Matéria</label>
+              <select id="subjects">
+                <option value="">Selecione a matéria</option>
+              </select>
+            </div>
+            <!-- O campo de sala foi removido -->
+
+            <div class="form-group full-width">
+              <label for="objetivos">Objetivos do Plano</label>
+              <textarea id="objetivos" placeholder="Descreva os principais objetivos do plano docente..."></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="conteudo">Conteúdo Programático</label>
+              <textarea id="conteudo" placeholder="Liste o conteúdo programático a ser ministrado..."></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="metodologia">Metodologia</label>
+              <textarea id="metodologia" placeholder="Descreva a metodologia de ensino que será aplicada..."></textarea>
+            </div>
+          </div>
+
+          <div class="btn-container">
+            <button type="button" class="btn btn-secondary">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar Plano</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Dados simulados do professor (sem dados de sala, pois houve conflito)
+      const teacher = {
+        name: "Professor Silva",
+        subjects: [
+          { name: "Matemática" },
+          { name: "Português" }
+        ]
+      };
+
+      // Se o professor leciona mais de uma matéria, exibe o campo de seleção de matéria
+      if (teacher.subjects.length > 1) {
+        const subjectContainer = document.getElementById('subject-container');
+        subjectContainer.style.display = 'block';
+
+        const subjectSelect = document.getElementById('subjects');
+        teacher.subjects.forEach(subject => {
+          subjectSelect.innerHTML += `<option value="${subject.name}">${subject.name}</option>`;
+        });
+      }
+
+      // Funcionalidade básica do formulário
+      document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Plano docente salvo com sucesso!');
+      });
+
+      // Limpar formulário
+      document.querySelector('.btn-secondary').addEventListener('click', function() {
+        if (confirm('Deseja realmente limpar todos os campos?')) {
+          document.querySelector('form').reset();
+        }
+      });
+    </script>
+  </body>
+</html>
