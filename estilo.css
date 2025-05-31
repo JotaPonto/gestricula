@@ -236,3 +236,140 @@ textarea {
     margin-top: 20px;
     width: 100%;
 }
+.nsei{
+    body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f4c2a1, #f7d794);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background: #f7d794;
+    padding: 15px 30px;
+    text-align: left;
+}
+
+.nav-link {
+    color: #666;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 400px;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    color: #4a9b8e;
+}
+
+.form-section p {
+    font-size: 14px;
+    color: #666;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #4a9b8e;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #3d8b7d;
+}
+
+}
+.nsei2{
+    body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f4c2a1, #f7d794);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background: #f7d794;
+    padding: 15px 30px;
+    text-align: left;
+}
+
+.nav-link {
+    color: #666;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 400px;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    color: #4a9b8e;
+}
+
+.form-section p {
+    font-size: 14px;
+    color: #666;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4a9b8e;
+}
+
+button.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #4a9b8e;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background: #3d8b7d;
+    transform: translateY(-2px);
+}
+
+}
